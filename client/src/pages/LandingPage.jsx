@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import {
-  Zap, Phone, Brain, Filter, Download, Shield,
+  Phone, Brain, Filter, Download, Shield,
   Users, MessageSquare, Upload, Lock, Headphones, Database,
   BarChart2, Clock, Languages, ArrowRight, CheckCircle,
 } from 'lucide-react';
@@ -193,7 +193,7 @@ export default function LandingPage() {
   }
 
   return (
-    <div style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-text-primary)', minHeight: '100vh', overflowX: 'hidden' }}>
+    <div style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-text-primary)', minHeight: '100vh' }}>
 
       {/* ── Subtle Scroll Progress Indicator (dusty rose) ── */}
       <div
@@ -220,38 +220,46 @@ export default function LandingPage() {
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
         borderBottom: '1px solid var(--color-border)',
-        padding: '0 48px', height: 72,
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        height: 72,
         boxShadow: scrolled ? '0 4px 20px -2px rgba(43,35,33,0.07)' : '0 1px 0 var(--color-border)',
         transition: 'background-color 0.25s ease, box-shadow 0.25s ease',
       }}>
-        {/* Logo with subtle hover micro-interaction */}
-        <div className="lp-brand-logo" onClick={() => navigate('/')}>
-          <div className="lp-brand-icon">
-            <Zap size={22} strokeWidth={1.75} color="#FFFFFF" />
+        {/* Inner container — matches page content boundary */}
+        <div style={{
+          maxWidth: 1440,
+          margin: '0 auto',
+          padding: '0 clamp(24px, 3.5vw, 56px)',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          width: '100%',
+        }}>
+          {/* Text-based Logo */}
+          <div className="lp-brand-logo" onClick={() => navigate('/')}>
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', lineHeight: 1 }}>
+              <span style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 700, fontSize: 17.5, color: 'var(--color-text-primary)', lineHeight: 1.15, margin: 0 }}>
+                ARB Softech
+              </span>
+              <span style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: 9, fontWeight: 700, color: 'var(--color-text-secondary)', letterSpacing: '1.2px', textTransform: 'uppercase', lineHeight: 1, marginTop: 3 }}>
+                AI VOICE AGENT
+              </span>
+            </div>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', lineHeight: 1 }}>
-            <span style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 700, fontSize: 17.5, color: 'var(--color-text-primary)', lineHeight: 1.15, margin: 0 }}>
-              ARB Softech
-            </span>
-            <span style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: 9, fontWeight: 700, color: 'var(--color-text-secondary)', letterSpacing: '1.2px', textTransform: 'uppercase', lineHeight: 1, marginTop: 3 }}>
-              AI VOICE AGENT
-            </span>
-          </div>
-        </div>
 
-        {/* Nav links */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-          {[['#features', 'Features'], ['#how', 'How It Works'], ['#demo', 'Request Demo']].map(([href, label]) => (
-            <a key={href} href={href} className="lp-nav-link">{label}</a>
-          ))}
-          <button
-            className="lp-btn-primary"
-            onClick={() => navigate('/admin/login')}
-            style={{ padding: '10px 22px', fontSize: 13, marginLeft: 8 }}
-          >
-            Admin Portal <span className="lp-btn-arrow"><ArrowRight size={14} strokeWidth={2} /></span>
-          </button>
+          {/* Nav links */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+            {[['#features', 'Features'], ['#how', 'How It Works'], ['#demo', 'Request Demo']].map(([href, label]) => (
+              <a key={href} href={href} className="lp-nav-link">{label}</a>
+            ))}
+            <button
+              className="lp-btn-primary"
+              onClick={() => navigate('/admin/login')}
+              style={{ padding: '10px 22px', fontSize: 13, marginLeft: 8 }}
+            >
+              Admin Portal <span className="lp-btn-arrow"><ArrowRight size={14} strokeWidth={2} /></span>
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -260,9 +268,9 @@ export default function LandingPage() {
       ══════════════════════════════════════ */}
       <section style={{
         position: 'relative',
-        maxWidth: 1200,
+        maxWidth: 1440,
         margin: '0 auto',
-        padding: 'clamp(60px, 8vh, 100px) 48px clamp(60px, 8vh, 90px)',
+        padding: `clamp(60px, 8vh, 100px) clamp(24px, 3.5vw, 56px) clamp(60px, 8vh, 90px)`,
         overflow: 'hidden',
       }}>
         {/* Decorative blobs */}
@@ -280,10 +288,10 @@ export default function LandingPage() {
         }} />
 
         {/* Split layout — visually balanced */}
-        <div className="lp-hero-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.08fr) minmax(0, 0.92fr)', alignItems: 'center', gap: 'clamp(36px, 5vw, 64px)', position: 'relative' }}>
+        <div className="lp-hero-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', alignItems: 'center', gap: 'clamp(28px, 3.5vw, 52px)', position: 'relative' }}>
 
           {/* ── LEFT: Headline + CTA ── */}
-          <div className="lp-hero-left" style={{ maxWidth: 540 }}>
+          <div className="lp-hero-left" style={{ minWidth: 0 }}>
             {/* Eyebrow badge */}
             <div className="lp-hero-animate lp-delay-1" style={{ marginBottom: 22, display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 14px 6px 8px', borderRadius: 999, background: 'var(--color-primary-light)', border: '1px solid var(--color-primary-ring)' }}>
               <span style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 10, height: 10 }}>
@@ -372,6 +380,18 @@ export default function LandingPage() {
               }}
             />
 
+            {/* Decorative handwritten brand annotation */}
+            <div
+              className="lp-hero-annotation"
+              aria-hidden="true"
+            >
+              <span className="lp-annotation-text">
+                From<br />
+                Conversations<br />
+                to Conversions.
+              </span>
+            </div>
+
             {/* Card 1 — English — top, cascading position */}
             <div
               className="hero-card-in-1 lp-hero-card-wrap lp-hero-card-wrap-1"
@@ -442,11 +462,18 @@ export default function LandingPage() {
         backgroundColor: 'var(--color-surface)',
         borderTop: '1px solid var(--color-border)',
         borderBottom: '1px solid var(--color-border)',
-        padding: 'clamp(64px, 8vh, 100px) 48px',
+        padding: `clamp(60px, 7.5vh, 90px) 0`,
+        scrollMarginTop: 72,
       }}>
-        <div ref={howRef} className="lp-section-reveal" style={{ maxWidth: 1200, margin: '0 auto' }}>
+        <div ref={howRef} className="lp-section-reveal" style={{
+          width: '100%',
+          maxWidth: 1440,
+          margin: '0 auto',
+          padding: '0 clamp(24px, 3.5vw, 56px)',
+          boxSizing: 'border-box',
+        }}>
           {/* Section header with hierarchical reveal */}
-          <div className="lp-reveal-header" style={{ textAlign: 'center', marginBottom: 56 }}>
+          <div className="lp-reveal-header" style={{ textAlign: 'center', marginBottom: 44 }}>
             <div className="lp-eyebrow" style={{ marginBottom: 12 }}>Simple Workflow</div>
             <h2 className="lp-heading" style={{ fontSize: 'clamp(28px, 3vw, 40px)', margin: 0 }}>
               How The Platform Operates
@@ -461,9 +488,9 @@ export default function LandingPage() {
               aria-hidden="true"
               style={{
                 position: 'absolute',
-                top: 36,
-                left: '4%',
-                right: '4%',
+                top: 41,
+                left: '3%',
+                right: '3%',
                 height: 2,
                 zIndex: 0,
               }}
@@ -546,14 +573,28 @@ export default function LandingPage() {
       <section id="features" style={{
         backgroundColor: 'var(--color-surface-raised)',
         borderBottom: '1px solid var(--color-border)',
-        padding: 'clamp(64px, 8vh, 100px) 48px',
+        padding: `clamp(64px, 8vh, 96px) 0`,
+        scrollMarginTop: 72,
       }}>
-        <div ref={featRef} className="lp-section-reveal" style={{ maxWidth: 1200, margin: '0 auto' }}>
+        <div ref={featRef} className="lp-section-reveal" style={{
+          width: '100%',
+          maxWidth: 1280,
+          margin: '0 auto',
+          padding: '0 clamp(24px, 3.5vw, 48px)',
+          boxSizing: 'border-box',
+        }}>
           {/* Section header with hierarchical reveal */}
-          <div className="lp-reveal-header" style={{ marginBottom: 48 }}>
+          <div className="lp-reveal-header" style={{ textAlign: 'center', marginBottom: 52 }}>
             <div className="lp-eyebrow" style={{ marginBottom: 12 }}>Capabilities</div>
-            <h2 className="lp-heading" style={{ fontSize: 'clamp(28px, 3vw, 40px)', maxWidth: 520, margin: 0 }}>
-              Enterprise Features Built-in
+            <h2
+              className="lp-heading lp-capabilities-heading"
+              style={{
+                fontSize: 'clamp(28px, 3.2vw, 40px)',
+                lineHeight: 1.25,
+                margin: 0,
+              }}
+            >
+              Enterprise Features <span style={{ whiteSpace: 'nowrap' }}>Built-in</span>
             </h2>
           </div>
 
@@ -686,25 +727,37 @@ export default function LandingPage() {
       <section id="demo" style={{
         backgroundColor: 'var(--color-surface)',
         borderBottom: '1px solid var(--color-border)',
-        padding: 'clamp(64px, 8vh, 100px) 48px',
+        padding: `clamp(56px, 6.5vh, 80px) 0`,
+        scrollMarginTop: 72,
       }}>
-        <div ref={demoRef} className="lp-section-reveal" style={{ maxWidth: 1000, margin: '0 auto' }}>
-          <div className="lp-demo-grid" style={{ display: 'flex', gap: 'clamp(40px, 6vw, 80px)', alignItems: 'flex-start' }}>
+        <div ref={demoRef} className="lp-section-reveal" style={{
+          width: '100%',
+          maxWidth: 1080,
+          margin: '0 auto',
+          padding: '0 clamp(24px, 3.5vw, 48px)',
+          boxSizing: 'border-box',
+        }}>
+          <div className="lp-demo-grid" style={{
+            display: 'flex',
+            gap: 'clamp(36px, 5vw, 64px)',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}>
 
-            {/* LEFT — copy with hierarchical reveal */}
-            <div style={{ flex: '1 1 0', paddingTop: 8 }}>
+            {/* LEFT — copy with hierarchical reveal (vertically centered) */}
+            <div style={{ flex: '1 1 0', maxWidth: 520 }}>
               <div className="lp-reveal-header">
-                <div className="lp-eyebrow" style={{ marginBottom: 14 }}>Get Started</div>
-                <h2 className="lp-heading" style={{ fontSize: 'clamp(28px, 3vw, 40px)', marginBottom: 18, margin: '0 0 18px 0' }}>
+                <div className="lp-eyebrow" style={{ marginBottom: 12 }}>Get Started</div>
+                <h2 className="lp-heading" style={{ fontSize: 'clamp(28px, 3vw, 38px)', lineHeight: 1.2, marginBottom: 14, margin: '0 0 14px 0' }}>
                   Request Platform Demo
                 </h2>
               </div>
-              <p className="lp-body lp-reveal-sub" style={{ fontSize: 15, marginBottom: 32 }}>
+              <p className="lp-body lp-reveal-sub" style={{ fontSize: 15, lineHeight: 1.55, marginBottom: 26, margin: '0 0 26px 0' }}>
                 Experience human-like AI calling tailored to your enterprise campaigns.
               </p>
 
               {/* Trust signals using existing content */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {[
                   'Multilingual — Hindi, English, Marathi',
                   'Thousands of concurrent AI calls',
@@ -715,19 +768,19 @@ export default function LandingPage() {
                     <div style={{ width: 22, height: 22, borderRadius: 6, background: 'rgba(91,138,114,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <CheckCircle size={13} strokeWidth={2} color="var(--color-success)" />
                     </div>
-                    <span className="lp-body" style={{ fontSize: 14, color: 'var(--color-text-primary)' }}>{item}</span>
+                    <span className="lp-body" style={{ fontSize: 13.5, color: 'var(--color-text-primary)' }}>{item}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* RIGHT — form card */}
-            <div style={{ flex: '1 1 0', maxWidth: 440 }}>
+            <div style={{ flex: '0 0 auto', width: '100%', maxWidth: 440 }}>
               <div style={{
                 background: 'var(--color-surface-raised)',
                 border: '1px solid var(--color-border)',
                 borderRadius: 20,
-                padding: '36px 32px',
+                padding: '32px 28px',
                 boxShadow: 'var(--shadow-lg)',
               }}>
                 {demoSent ? (
@@ -740,7 +793,7 @@ export default function LandingPage() {
                   </div>
                 ) : (
                   <>
-                    <h3 style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: 20, fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: 24, margin: '0 0 24px 0' }}>Book a Live Demo</h3>
+                    <h3 style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: 20, fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: 22, margin: '0 0 22px 0' }}>Book a Live Demo</h3>
                     <form onSubmit={handleDemo} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                       {[
                         { label: 'Full Name',     key: 'name',  type: 'text',  placeholder: 'John Doe' },
@@ -784,28 +837,28 @@ export default function LandingPage() {
       <footer style={{
         backgroundColor: 'var(--color-background)',
         borderTop: '1px solid var(--color-border)',
-        padding: '36px 48px',
+        padding: `28px 0`,
       }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
+        <div style={{
+          width: '100%',
+          maxWidth: 1440,
+          margin: '0 auto',
+          padding: '0 clamp(24px, 3.5vw, 56px)',
+          boxSizing: 'border-box',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: 16,
+        }}>
           {/* Brand */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
-            <div style={{
-              width: 34, height: 34, borderRadius: 9,
-              background: 'var(--color-primary)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: '0 2px 8px var(--color-primary-ring)',
-              flexShrink: 0,
-            }}>
-              <Zap size={18} strokeWidth={2} color="#FFFFFF" />
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', lineHeight: 1 }}>
-              <span style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 15, fontWeight: 700, color: 'var(--color-text-primary)', lineHeight: 1.15, margin: 0 }}>
-                ARB Softech
-              </span>
-              <span style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: 8.5, fontWeight: 700, color: 'var(--color-text-secondary)', letterSpacing: '1.1px', textTransform: 'uppercase', lineHeight: 1, marginTop: 2 }}>
-                AI VOICE AGENT
-              </span>
-            </div>
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', lineHeight: 1 }}>
+            <span style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 15, fontWeight: 700, color: 'var(--color-text-primary)', lineHeight: 1.15, margin: 0 }}>
+              ARB Softech
+            </span>
+            <span style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: 8.5, fontWeight: 700, color: 'var(--color-text-secondary)', letterSpacing: '1.1px', textTransform: 'uppercase', lineHeight: 1, marginTop: 2 }}>
+              AI VOICE AGENT
+            </span>
           </div>
 
           {/* Copyright */}

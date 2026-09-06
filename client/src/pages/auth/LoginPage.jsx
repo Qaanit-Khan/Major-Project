@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { Eye, EyeOff, Mail, Lock, Zap, ShieldCheck } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, ShieldCheck } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 export default function LoginPage() {
@@ -55,21 +55,12 @@ export default function LoginPage() {
         padding: '40px 40px 36px 40px',
       }}>
         {/* Brand Header */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 32 }}>
-          <div style={{
-            width: 40, height: 40, borderRadius: 'var(--radius-md)',
-            backgroundColor: 'var(--color-primary)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}>
-            <Zap size={20} strokeWidth={1.75} color="#FFFFFF" />
+        <div style={{ marginBottom: 32 }}>
+          <div style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: 18, fontWeight: 700, color: 'var(--color-text-primary)', lineHeight: 1.2 }}>
+            ARB Softech
           </div>
-          <div>
-            <div style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)', lineHeight: 1.2 }}>
-              ARB Softech
-            </div>
-            <div style={{ fontFamily: 'Nunito Sans, sans-serif', fontSize: 9, fontWeight: 700, color: 'var(--color-text-secondary)', letterSpacing: '1px', textTransform: 'uppercase' }}>
-              AI VOICE AGENT
-            </div>
+          <div style={{ fontFamily: 'Nunito Sans, sans-serif', fontSize: 9, fontWeight: 700, color: 'var(--color-text-secondary)', letterSpacing: '1px', textTransform: 'uppercase', marginTop: 3 }}>
+            AI VOICE AGENT
           </div>
         </div>
 

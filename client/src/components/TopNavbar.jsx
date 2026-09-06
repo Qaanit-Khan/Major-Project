@@ -3,7 +3,7 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import {
   LayoutDashboard, Users, Phone, Megaphone, HelpCircle,
-  CalendarClock, KeyRound, ClipboardList, Zap, LogOut, Bell,
+  CalendarClock, KeyRound, ClipboardList, LogOut, Bell,
   RefreshCw, Menu, X, Plus, UploadCloud, FileQuestion, BarChart2, ChevronDown
 } from 'lucide-react';
 
@@ -99,9 +99,6 @@ export default function TopNavbar({ onRefresh, refreshing }) {
       <div className="top-nav-inner">
         {/* ── Left: Logo ── */}
         <div className="top-nav-logo" onClick={() => navigate('/admin/dashboard')}>
-          <div className="logo-icon-wrap">
-            <Zap size={18} strokeWidth={1.75} color="#fff" />
-          </div>
           <div className="logo-text-wrap">
             <span className="logo-title">ARB Softech</span>
             <span className="logo-sub">AI VOICE AGENT</span>

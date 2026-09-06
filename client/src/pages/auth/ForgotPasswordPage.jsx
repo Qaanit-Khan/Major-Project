@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../api/client';
-import { Mail, ArrowLeft, Zap, CheckCircle } from 'lucide-react';
+import { Mail, ArrowLeft, CheckCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 export default function ForgotPasswordPage() {
@@ -36,15 +36,14 @@ export default function ForgotPasswordPage() {
         boxShadow: 'var(--shadow-lg)',
         padding: '40px 40px 36px 40px',
       }}>
-        {/* Brand */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 32 }}>
-          <div style={{
-            width: 36, height: 36, background: 'var(--color-primary)',
-            borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}>
-            <Zap size={18} strokeWidth={1.75} color="#fff" />
+        {/* Brand Header */}
+        <div style={{ marginBottom: 32 }}>
+          <div style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: 18, fontWeight: 700, color: 'var(--color-text-primary)', lineHeight: 1.2 }}>
+            ARB Softech
           </div>
-          <span style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)' }}>ARB Softech</span>
+          <div style={{ fontFamily: 'Nunito Sans, sans-serif', fontSize: 9, fontWeight: 700, color: 'var(--color-text-secondary)', letterSpacing: '1px', textTransform: 'uppercase', marginTop: 3 }}>
+            AI VOICE AGENT
+          </div>
         </div>
 
         <h1 style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: 26, fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: 8 }}>
