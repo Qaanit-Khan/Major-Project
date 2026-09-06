@@ -1,7 +1,7 @@
 /* ARB SOFTECH - Enterprise Design System (Dusty Rose & Soft Terracotta)
    Single source of truth for colors, typography, layout, and subtle micro-interactions. */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 /* -- 1. Design Tokens --------------------------------------- */
@@ -108,6 +108,7 @@
 
 html {
   font-size: 14px;
+  overflow-x: clip; /* clip, not hidden — doesn't create a new scroll container */
 }
 
 body {
@@ -119,6 +120,7 @@ body {
   background-color: var(--color-background);
   margin: 0;
   padding: 0;
+  overflow-x: clip; /* prevents horizontal scroll without breaking sticky */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -268,23 +270,15 @@ small, .text-caption {
 .top-nav-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
   cursor: pointer;
   user-select: none;
   text-decoration: none;
   flex-shrink: 0;
+  transition: opacity 0.18s ease;
 }
 
-.logo-icon-wrap {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-md);
-  background: var(--color-primary) !important;
-  color: #FFFFFF;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+.top-nav-logo:hover {
+  opacity: 0.82;
 }
 
 .logo-text-wrap {
@@ -1479,6 +1473,48 @@ textarea.input {
 .hero-card-in-2 { animation: heroCardIn2 0.52s cubic-bezier(0.16, 1, 0.3, 1) 0.54s both; }
 .hero-card-in-3 { animation: heroCardIn3 0.52s cubic-bezier(0.16, 1, 0.3, 1) 0.64s both; }
 
+/* ── Handwritten brand editorial annotation ── */
+.lp-hero-annotation {
+  position: absolute;
+  top: -96px;
+  right: 16px;
+  z-index: 4;
+  pointer-events: none;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  transform: rotate(-6deg);
+  transform-origin: bottom right;
+  opacity: 0;
+  animation: lpAnnotationEntrance 600ms cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards;
+}
+
+.lp-annotation-text {
+  font-family: 'Caveat', cursive, sans-serif;
+  font-size: 21.5px;
+  font-weight: 600;
+  line-height: 1.18;
+  background: linear-gradient(135deg, #D6536D 0%, #C4455F 55%, #D47B6A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  letter-spacing: 0.015em;
+  filter: drop-shadow(0 1px 2px rgba(214, 83, 109, 0.18));
+}
+
+@keyframes lpAnnotationEntrance {
+  from {
+    opacity: 0;
+    transform: rotate(-6deg) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-6deg) translateY(0);
+  }
+}
+
 /* ── Conversation card float (subtle, organic independent vertical float 4–6s, 2-5px) ── */
 @keyframes conv-float-a {
   0%, 100% { transform: translateY(0px); }
@@ -1768,26 +1804,14 @@ textarea.input {
 /* ── ARB Softech Brand Logo Navbar Hover ── */
 .lp-brand-logo {
   display: flex;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column;
+  justify-content: center;
   cursor: pointer;
   user-select: none;
+  transition: opacity 0.18s ease;
 }
-.lp-brand-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: var(--color-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 10px rgba(214, 83, 109, 0.22);
-  flex-shrink: 0;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
-}
-.lp-brand-logo:hover .lp-brand-icon {
-  transform: scale(1.05);
-  box-shadow: 0 4px 14px rgba(214, 83, 109, 0.38);
+.lp-brand-logo:hover {
+  opacity: 0.82;
 }
 
 /* ── Landing navbar link hover ── */
@@ -1897,6 +1921,7 @@ textarea.input {
 /* ── Reduced motion (accessibility) ── */
 @media (prefers-reduced-motion: reduce) {
   .lp-hero-animate,
+  .lp-hero-annotation,
   .conv-float-a, .conv-float-b, .conv-float-c,
   .lp-section-reveal, .lp-stagger > *,
   .lp-reveal-header, .lp-reveal-sub,
@@ -1914,6 +1939,16 @@ textarea.input {
   }
 }
 
+/* ── Capabilities Heading single line on desktop ── */
+.lp-capabilities-heading {
+  white-space: normal;
+}
+@media (min-width: 640px) {
+  .lp-capabilities-heading {
+    white-space: nowrap;
+  }
+}
+
 /* ── Landing page responsive hero cards ── */
 .lp-hero-card-wrap {
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), z-index 0.25s ease;
@@ -1923,6 +1958,16 @@ textarea.input {
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
+  .lp-hero-annotation {
+    top: -88px !important;
+    right: 12px !important;
+    transform: rotate(-5.5deg) !important;
+    transform-origin: bottom right !important;
+  }
+  .lp-annotation-text {
+    font-size: 19px !important;
+    line-height: 1.15 !important;
+  }
   .lp-hero-card-wrap-1 { left: 20px !important; right: 0 !important; }
   .lp-hero-card-wrap-2 { left: 0 !important; right: 20px !important; }
   .lp-hero-card-wrap-3 { left: 20px !important; right: 0 !important; }
@@ -1931,8 +1976,26 @@ textarea.input {
   .lp-features-secondary-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
 
-/* ── Landing page mobile ── */
+/* ── Landing page tablet portrait & mobile ── */
 @media (max-width: 768px) {
+  .lp-hero-annotation {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    margin: 0 68px 12px auto !important;
+    align-self: flex-end !important;
+    text-align: right !important;
+    transform: rotate(-3.5deg) !important;
+    transform-origin: center right !important;
+    opacity: 1 !important;
+    animation: none !important;
+  }
+  .lp-annotation-text {
+    font-size: 17px !important;
+    line-height: 1.15 !important;
+  }
   .lp-hero-grid { display: flex !important; flex-direction: column !important; gap: 36px !important; }
   .lp-hero-left, .lp-hero-right { max-width: 100% !important; width: 100% !important; }
   .lp-hero-right { height: auto !important; position: static !important; }
@@ -1940,8 +2003,14 @@ textarea.input {
   .lp-hero-card-wrap:last-child { margin-bottom: 0 !important; }
   .lp-conv-card { position: static !important; transform: none !important; animation: none !important; width: 100% !important; }
   .lp-workflow-track { display: none !important; }
-  .lp-steps-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
-  .lp-features-primary-grid { grid-template-columns: 1fr !important; }
-  .lp-features-secondary-grid { grid-template-columns: 1fr !important; }
+  .lp-steps-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 14px !important; }
+  .lp-features-primary-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 16px !important; }
+  .lp-features-secondary-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .lp-demo-grid { flex-direction: column !important; }
+}
+
+@media (max-width: 540px) {
+  .lp-steps-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+  .lp-features-primary-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
+  .lp-features-secondary-grid { grid-template-columns: 1fr !important; }
 }
